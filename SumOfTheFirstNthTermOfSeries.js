@@ -1,15 +1,9 @@
 function SeriesSum(n) {
-    let x;
     let y = 0;
-    if (n !== 0) {
-        for (i = 0; i < n; i++) {
-            x = 1 / (1 + i*3);
-            y += x
-        } return y.toFixed(2);
-    } else {
-        return n.toFixed(2);
-    }
-}
+    for (i = 0; i < n; i++) {
+        y += 1 / (1 + i * 3);
+    } return y.toFixed(2);
+}  
 // Rules:
 // You need to round the answer to 2 decimal places and return it as String.
 
