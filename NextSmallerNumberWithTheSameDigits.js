@@ -1,4 +1,4 @@
-function nextBigger(n) {
+function nextSmaller(n) {
     let help = [];
     let otvet = [];
     let p;
@@ -7,12 +7,13 @@ function nextBigger(n) {
     n = n + '';
     let newN = n + '';
     newN = newN.split('').reverse();
-    if (newN[0] > newN[1]) {
+    if (newN[1] > newN[0]) {
         let a = newN[0];
         let b = newN[1];
         newN[0] = b;
         newN[1] = a;
         newN = newN.reverse().join('');
+        if (newN[0]==0) {return -1}
         return parseInt(newN);
     } else {
         for (j = 1; j < newN.length - 1; j++) {
@@ -20,20 +21,23 @@ function nextBigger(n) {
             let bb = newN[j + 1];
             aa = parseInt(aa);
             bb = parseInt(bb);
-            if (aa > bb) {
+            if (bb > aa) {
                 let newNN = [...newN];
                 let x = newNN.splice(0, j + 2);
-                for (q = 1; q < 9; q++) {
-                    let poisk = bb + q + "";
+                for (q = 1; q < 10; q++) {
+                    let poisk = bb - q + "";
                     let result = x.indexOf(poisk);
                     if (result !== -1) {
                         p = otvet.push(poisk);
                         m = x.splice(result, 1);
-                        x.sort();
+                        x.sort().reverse();
                         help = otvet.concat(x);
                         newNN = newNN.reverse();
                         gg = newNN.concat(help);
                         gg = gg.join('');
+                        if (gg[0] == 0) {
+                            return -1;
+                        }
                         return parseInt(gg);
                     }
                 }
@@ -42,12 +46,12 @@ function nextBigger(n) {
     } return -1;
 }
 
-// Create a function that takes a positive integer and returns the next bigger number that can be formed by rearranging its digits. For example:
+// Write a function that takes a positive integer and returns the next smaller positive integer containing the same digits.
 
-// 12 ==> 21
-// 513 ==> 531
-// 2017 ==> 2071
-// nextBigger(num: 12)   // returns 21
-// nextBigger(num: 513)  // returns 531
-// nextBigger(num: 2017) // returns 2071
+// For example:
 
+// nextSmaller(21) == 12
+// nextSmaller(531) == 513
+// nextSmaller(2071) == 2017
+// Return -1 (for Haskell: return Nothing, for Rust: return None), when there is no smaller number that contains the same digits. 
+// Also return -1 when the next smaller number with the same digits would require the leading digit to be zero.
