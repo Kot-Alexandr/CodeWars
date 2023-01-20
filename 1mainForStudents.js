@@ -1,48 +1,4 @@
-const students = [
-    {
-        id: 1,
-        name: "Bob",
-        age: 22,
-        isMarried: true,
-        scores: 85,
-        // friends: ["Alex", "Nick", "John", "Helen", "Ann"]
-    },
-    {
-        id: 2,
-        name: "Alex",
-        age: 21,
-        isMarried: true,
-        scores: 90,
-    },
-    {
-        id: 3,
-        name: "Nick",
-        age: 20,
-        isMarried: false,
-        scores: 120
-    },
-    {
-        id: 4,
-        name: "John",
-        age: 19,
-        isMarried: false,
-        scores: 100
-    },
-    {
-        id: 5,
-        name: "Helen",
-        age: 20,
-        isMarried: false,
-        scores: 110
-    },
-    {
-        id: 6,
-        name: "Ann",
-        age: 20,
-        isMarried: false,
-        scores: 105
-    },
-];
+
 
 const user = {
     name: "Bob",
@@ -118,16 +74,8 @@ console.log(deepCopyStudents[2].isMarried === copyStudents[2].isMarried)
 // Вывод результатов - в консоль
 
 //5. Отсортируйте копию массива deepCopyStudents по алфавиту (sort)
-const sortABC = (a, b) => {
-    if (a.name > b.name) {
-        return 1
-    }
-    if (a.name < b.name) {
-        return -1
-    }
-    return 0;
-}
-let sortedByName = deepCopyStudents.sort(sortABC)
+
+let sortedByName = stu.sort(localCompare)
 console.log(sortedByName);
 
 //5a. Отсортируйте deepCopyStudents по успеваемости (лучший идёт первым)(sort)
@@ -187,7 +135,7 @@ console.log(studentsWithMarriedNick)
 
 //11. Найдите студента по имени Ann (find) 
 
-let ann = newDeepCopyStudents.find(el=>el.name==="Ann")
+let ann = newDeepCopyStudents.find(el => el.name === "Ann")
 console.log(ann)
 // или
 let ann1 = ""
@@ -207,25 +155,25 @@ console.log(ann1)
 // - *не испльзуя методы массивов и Math.max()*
 
 
-let bestStudent = newDeepCopyStudents.reduce(function (a, b) { return a > b.scores ? a = b : a })
+let bestStudent = students.reduce(function (a, b) { return a.scores > b.scores ? a : b })
 console.log(bestStudent)
 //
 const Bubble = (n) => {
-    let big = n[0].scores
+    let big = n[0]
     for (j = 0; j < n.length - 1; j++) {
 
-        if (n[j + 1] > big) {
+        if (n[j + 1].scores > big.scores) {
             big = n[j + 1]
         }
     }
     return big
 }
 
-let bestStudent1 = Bubble(newDeepCopyStudents)
+let bestStudent1 = Bubble(students)
 console.log(bestStudent1)
 
 //13. Найдите сумму баллов всех студентов (reduce)
-let scoresSum = newDeepCopyStudents.reduce(function (a, b) { return a + b.scores }, 0)
+let scoresSum = students.reduce(function (a, b) { return a + b.scores }, 0)
 console.log(scoresSum)
 
 
@@ -235,6 +183,9 @@ console.log(scoresSum)
 // и добавляет в каждому студенту свойство "friends",
 // значением которого является массив имён всех остальных студентов из массива students,
 // за исключением собственного имени студента. Т.е. в друзьях у Боба Боба быть не должно.
+
+
+
 const addFriends = (students) => {
 
     for (i = 0; i < students.length; i++) {
@@ -254,8 +205,76 @@ console.log(addFriends(students));
 // getBestStudents(students, 3)
 // getBestStudents(students, 10) => [{}, {}, ...., {}, null, null, null, null ]
 
+const students = [
+    {
+        id: 1,
+        name: "Bob",
+        age: 22,
+        isMarried: true,
+        scores: 85,
+
+    },
+    {
+        id: 2,
+        name: "Alex",
+        age: 21,
+        isMarried: true,
+        scores: 90,
+    },
+    {
+        id: 3,
+        name: "Nick",
+        age: 20,
+        isMarried: false,
+        scores: 120
+    },
+    {
+        id: 4,
+        name: "John",
+        age: 19,
+        isMarried: false,
+        scores: 100
+    },
+    {
+        id: 5,
+        name: "Helen",
+        age: 20,
+        isMarried: false,
+        scores: 110
+    },
+    {
+        id: 6,
+        name: "Ann",
+        age: 20,
+        isMarried: false,
+        scores: 105
+    },
+];
+
+const getBestStudents = (st, n) => {
+       const sort123 = (a, b) => {
+        if (a.scores < b.scores) {
+            return 1
+        }
+        if (a.scores > b.scores) {
+            return -1
+        }
+        return 0;
+    }
+    let sortedByScores = st.sort(sort123)
+    n ? (
+        kuk = Array(n).fill(null),
+        topStudents = sortedByScores.splice(0, n),
+        kuk.splice(topStudents.length - 2),
+        result = topStudents.concat(kuk)
+    ) : (
+        result = [sortedByScores[0]]
+    );
+
+    return result
 
 
+}
 
 
 
