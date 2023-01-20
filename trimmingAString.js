@@ -1,16 +1,6 @@
 function trim(str, size) {
-    if (str.length <= size) {
-        return str
-    } else {
-        if (str.length <= 3) {
-            return str.slice(0, size) + "..."
-        } else if (size<=3) {
-            return str.slice(0, size) + "..."
-        } else {
-            return str.slice(0, size - 3) + "..."
-        }
-    }
-} 
+  return str.length<= size ? str : str.slice(0, size<=3? size: size-3)+"..."
+}
 
 // Return a function that will trim a string (the first argument given) if it is longer than the maximum string length (the second argument given).
 //  The result should also end with "..."
